@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>London Crime Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/dcjs/dc.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+</head>
+<body ng-app="londoncrimeApp">
+    <page-loading class="pageloading pageloaded"><span>Loading...</span></page-loading>
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div id="main-wrap">
+        <div ui-view ></div>
+    </div>
+
+    <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyCckxILw3tv3EBFHx3Pi90dgzIHABhGqOc'></script>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ng-maps/dist/ng-maps.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/crossfilter/crossfilter.js"></script>
+    <script src="bower_components/dcjs/dc.js"></script>
+    <script src="bower_components/angular-dc/dist/angular-dc.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services/authservice.js"></script>
+    <script src="scripts/services/dataservice.js"></script>
+
+    <script src="scripts/directives/pageloading.js"></script>
+    <script src="scripts/directives/maploading.js"></script>
+    <script src="scripts/directives/geopolygoncustom.js"></script>
+    <script src="scripts/directives/pointscustom.js"></script>
+
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/dashboard.js"></script>
+    <script src="scripts/controllers/london.js"></script>
+    <script src="scripts/controllers/summary.js"></script>
+    <script src="scripts/controllers/borough-crimes.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

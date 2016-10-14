@@ -1,0 +1,30 @@
+<div id="header">
+    <div role="navigation" id="navbar">
+            <ul id="navigation">
+                <li ng-class="{active:$state.includes('dashboard')}" id="logo">
+                    <a ui-sref="dashboard" id="logo">London Crime Dashboard</a>
+                </li>
+                <li ng-class="{active:$state.includes('london')}">
+                    <a ui-sref="london" ui-sref-opts="{reload: true}">Crime Map</a>
+                </li>
+                <li>
+                    <a ng-click="Logout()" class="logout-button">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="page-wrap">
+    <div ui-view>
+        <div id="homepage-wrap">
+            <h1 id="homepage-title">London Crime Dashboard</h1>
+            <p>This dashboard visualizes real open data about crime and policing in London.</p>
+            <p>All the data on this site is made available under the Open Government Licence.</p>
+            <p>Data Source:<a href="https://data.police.uk/">https://data.police.uk/</a></p>
+            <p>The code is available on GitHub:<a href="#">GIT</a></p>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <span>London Crime Dashboard by Nandor Persanyi 2016</span>
+</div>

@@ -1,0 +1,7 @@
+<map ng-transclude class="slide-animation google-map" center="map.center" zoom="map.zoom" options="map.options" events="map.events" id="gmaps">
+    <map-loading class="map-loading"><span>Loading Map...</span></map-loading>
+    <geopolygonscustom geojson="boroughs.geojson" opacity=75 options="boroughs.options" events="boroughs.events"></geopolygonscustom>
+    <pointscustom coords="points.coords" properties="points.properties" options="points.options" events="points.events"></pointscustom>
+</map>
+<div id="county-name">{{selectedCounty.name}}</div>
+<div ui-view id="chart-wrap"></div>

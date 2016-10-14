@@ -1,0 +1,237 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+// endbower
+
+//Sass variables
+$titles: helvetica-light, sans-serif;
+$body-font: helvetica, sans-serif;
+
+//Set Defaults
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font:14px $body-font;
+}
+a{
+  text-decoration: none !important;
+}
+h1,h2,h3,h4{
+  margin: 30px;
+  font-weight: bold;
+  text-align:center;
+}
+h1{
+  font-size: 1.4em;
+}
+h2 {
+  font:1.2em $titles;
+}
+h3 {
+  font:1.1em $titles;
+}
+h4 {
+  font:1.1em $titles;
+}
+ul{
+  margin:0px;
+  padding:0px;
+  li{
+    list-style-type: none;
+    padding: 0px;
+  }
+}
+.active{
+  font-weight: bold;
+}
+
+//General
+#main-wrap{
+  width:100%;
+  float:left;
+  #page-wrap{
+    width:100%;
+    float:left;
+    margin-top: 50px;
+    #homepage-wrap{
+      border: 1px solid #ddd;
+      margin: 50px;
+      padding: 50px;
+      text-align: center;
+    }
+  }
+  #footer{
+    width: 100%;
+    float: left;
+    span{
+      text-align: center;
+      width: 100%;
+      float: left;
+    }
+  }
+}
+.pageloading{
+  position: fixed;
+  width: 100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  background-color: rgba(32,40,52,0.8);
+  z-index: 1000;
+  span{
+    width:100%;
+    position:absolute;
+    color:#fff;
+    font-size: 35px;
+    top:40%;
+    text-align: center;
+  }
+}
+.pageloaded{
+  display: none;
+  visibility: hidden;
+}
+
+//Navbar
+#header{
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  float: left;
+  font-size: 1.15em;
+  #navbar{
+    width: 100%;
+    float: left;
+    background-color: #999999;
+    a{
+      display: block;
+      line-height: 50px;
+      color:#efefef;
+    }
+  }
+  #navigation{
+    float: left;
+    li{
+      float: left;
+      padding: 0px 20px;
+      cursor: pointer;
+    }
+    li:hover{
+      background-color: #efefef;
+      a{
+        color:#7c7c7c;
+      }
+    }
+    li.active{
+      a{
+        color:#515151;
+      }
+    }
+    li.active:hover{
+      background-color: #999999;
+      a{
+        color:#515151;
+      }
+    }
+  }
+}
+
+//Login
+#login-wrap{
+  width: 35%;
+  min-width: 300px;
+  margin: 100px auto;
+  input{
+    float: left;
+    width: 100%;
+    display: block;
+    margin-bottom: 18px;
+  }
+  #login-button{
+    display: block;
+    max-width: 180px;
+    margin: 20px auto;
+  }
+}
+
+//Homepage
+#homepage-wrap{
+  padding: 0px 10%;
+  .homepage-title{
+    text-align: center;
+    float: none;
+    font-size:28px;
+  }
+}
+
+//Map Style
+.map-loading{
+  position: absolute;
+  width: 80%;
+  margin:0px 10%;
+  height: 100%;
+  background-color: rgba(32,40,52,0.8);
+  left: 0px;
+  z-index: 100;
+  span{
+    position: absolute;
+    width: 100%;
+    color:#fff;
+    text-align: center;
+    top:40%;
+  }
+}
+.map-loaded{
+  display:none;
+}
+.google-map {
+  position: relative;
+  float:left;
+  width:100%;
+  height:600px;
+}
+
+//Charts
+#chart-wrap{
+  float: left;
+  width: 100%;
+  #crime-location{
+    text-align: center;
+    font-weight: bold;
+    h2{
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+  .charts{
+    float: left;
+    width: 50%;
+    svg{
+      display: block;
+      height: 400px;
+      margin: 0px auto;
+    }
+    span{
+      width: 100%;
+      float: left;
+      text-align: center;
+      padding: 20px;
+    }
+    .axis.x .tick text{
+      text-anchor: start !important;
+    }
+    .y-axis-label{
+      font-size: 0.6em;
+    }
+  }
+}
+
+@media all and (max-width:800px){
+  #homepage-wrap{
+    margin: 10px !important;
+    padding: 10px !important;
+  }
+  #logo{
+    width:100%;
+  }
+}

@@ -1,0 +1,8 @@
+<div id="login-wrap">
+    <form ng-submit="login()">
+        <div ng-show="invalidLogin" class="alert alert-danger">Invalid username/password</div>
+        <input type="text" placeholder="Username" ng-model="credentials.username" ng-required="true"/>
+        <input type="password" placeholder="Password" ng-model="credentials.password" ng-required="true"/>
+        <button type="submit" id="login-button">{{buttonText}}</button>
+    </form>
+</div>
