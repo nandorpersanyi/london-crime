@@ -215,6 +215,23 @@ ul{
       margin-left: 10px;
     }
   }
+  #crime-point-filter{
+    position: absolute;
+    width: 180px;
+    top: 200px;
+    margin: 20px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(204, 204, 204);
+    .filter-checkbox-wrap{
+      float: left;
+      display: block;
+      width: 100%;
+      span{
+        font-size: 10px;
+        font-weight:bold;
+      }
+    }
+  }
   #crime-location{
     text-align: center;
     font-weight: bold;

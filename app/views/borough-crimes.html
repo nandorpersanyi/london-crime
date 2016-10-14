@@ -1,7 +1,8 @@
 <div id="crime-point-filter">
-	<form>
-		<input type="checkbox" ng-repeat="(key,value) in crimePointFilter" ng-model="crimePointFilter[key]" ng-change="filterCrimePoints()">
-	</form>
+	<div class="filter-checkbox-wrap" ng-repeat="(key,value) in crimePointFilter">
+		<span>{{key}}:</span>
+		<input type="checkbox" ng-model="crimePointFilter[key]" ng-change="filterCrimePoints()">
+	</div>
 </div>
 <div id="crime-point">
 	<span ng-show="!crimeType" class="bold">Zoom in on the map and select a crime scene!</span>

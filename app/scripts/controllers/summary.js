@@ -12,7 +12,7 @@ angular.module('londoncrimeApp')
 
     var chartsWidth = 525;
     var chartsHeight = 250;
-    //Params:  chartType,chartId,chartKey,width,height,xScale,xScaleSort,xScaleDomain,centerBar,event,eventFunc,tickNum,tickSwitchFunc,positionLabel
+    //Params:  chartType,chartId,chartKey,width,height,xScale,xScaleSort,xScaleDomain,centerBar,event,eventFunc,tickNum,tickSwitchFunc,positionLabel,switchTitle
     var offenceChart = new $scope.createChart('bar','#offence-chart','CrimeType',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,null,true,false);
     var boroughChart = new $scope.createChart('bar','#borough-chart','LSOA_name',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,null,true,false);
     var outcomeChart = new $scope.createChart('bar','#outcome-chart','LastOutcomeCategory',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,'switchOutcome',true,'switchOutcome');
@@ -27,5 +27,4 @@ angular.module('londoncrimeApp')
     /*var scrollToElem = angular.element(document.getElementById("county-navigation"));
     $document.scrollToElement(scrollToElem, 100, 2000);*/
     //<< Scroll to Content
-
 });

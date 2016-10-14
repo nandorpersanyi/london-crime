@@ -19,7 +19,7 @@ angular.module('londoncrimeApp')
     // Initiate boroughCrimeData object
     var boroughCrimeData = {};
     // crimePointFilter object model, connected to filter checkboxes in view
-    var crimePointFilter = {
+    $scope.crimePointFilter = {
         'Bicycle theft' : true,
         'Burglary' : true,
         'Criminal damage and arson' : true,
@@ -97,7 +97,7 @@ angular.module('londoncrimeApp')
     // Filter crimePoints >>
     // Filter crimes against crimePointFilter object
     function filterCrime(crime){
-        return crimePointFilter[crime.CrimeType];
+        return $scope.crimePointFilter[crime.CrimeType];
     }
     // Bootstrap crimePoint filter event, triggered in view. Resets crimePoint properties object and crimePoint
     // coordinates array and passes it to points directive config object 

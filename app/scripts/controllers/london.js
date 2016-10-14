@@ -13,46 +13,10 @@ angular.module('londoncrimeApp')
     $scope.crimeData = crimeData;
     $scope.selectedBorough = {};
     $scope.selectedBoroughTitle = 'London';
-    $scope.boroughSelected = false;
-    $rootScope.selectedBorough = {};
+    var boroughSelected = false;
 
     // Map Logic >>>
-    $scope.boroughList = [
-        { name : "Kingston upon Thames", id : 0 },
-        { name : "Croydon", id : 1 },
-        { name : "Bromley", id : 2 },
-        { name : "Hounslow", id : 3 },
-        { name : "Ealing", id : 4 },
-        { name : "Havering", id : 5 },
-        { name : "Hillingdon", id : 6 },
-        { name : "Harrow", id : 7 },
-        { name : "Brent", id : 8 },
-        { name : "Barnet", id : 9 },
-        { name : "Lambeth", id : 10 },
-        { name : "Southwark", id : 11 },
-        { name : "Lewisham", id : 12 },
-        { name : "Greenwich", id : 13 },
-        { name : "Bexley", id : 14 },
-        { name : "Enfield", id : 15 },
-        { name : "Waltham Forest", id : 16 },
-        { name : "Redbridge", id : 17 },
-        { name : "Sutton", id : 18 },
-        { name : "Richmond upon Thames", id : 19 },
-        { name : "Merton", id : 20 },
-        { name : "Wandsworth", id : 21 },
-        { name : "Hammersmith and Fulham", id : 22 },
-        { name : "Kensington and Chelsea", id : 23 },
-        { name : "Westminster", id : 24 },
-        { name : "Camden", id : 25 },
-        { name : "Tower Hamlets", id : 26 },
-        { name : "Islington", id : 27 },
-        { name : "Hackney", id : 28 },
-        { name : "Haringey", id : 29 },
-        { name : "Newham", id : 30 },
-        { name : "Barking and Dagenham", id : 31 },
-        { name : "City of London", id : 32 }
-    ];
-
+    // Set map directive config object
     $scope.map = {
         center: [51.515741, -0.115339],
         zoom: 10,
@@ -68,9 +32,8 @@ angular.module('londoncrimeApp')
             }
         }
     };
-
+    // Set geopolygoncustom directive config object
     $scope.boroughs = {
-        /*geojson: mapData,*/
         geojson:mapData,
         options: function(geometry, properties, map, i) {
             return {
@@ -91,7 +54,7 @@ angular.module('londoncrimeApp')
                 }
             },
             mouseout: function(e, p, map, polygons) {
-                if(!$scope.boroughSelected){
+                if(!boroughSelected){
                     $scope.selectedBoroughTitle = 'London';
                 } else {
                     $scope.selectedBoroughTitle = $scope.selectedBorough.name;
@@ -105,8 +68,8 @@ angular.module('londoncrimeApp')
             },
             click: function(e, p, map, polygons) {
                 if($scope.selectedBorough.name === undefined){
-                    $scope.boroughSelected = true;
-                    $scope.mapLoadBorough(p,map);
+                    boroughSelected = true;
+                    mapLoadBorough(p,map);
                 } else {
                     polygons.forEach(function(arrayElement,index) {
                         if(arrayElement.properties.NAME == $scope.selectedBorough.name){
@@ -117,37 +80,36 @@ angular.module('londoncrimeApp')
                             });
                         }
                     });
-                    $scope.boroughSelected = true;
+                    boroughSelected = true;
                     $scope.crimeType = null;
-                    $scope.mapLoadBorough(p,map);
+                    mapLoadBorough(p,map);
                 }
             }
         }
     };
-
+    // Set points directive config object
     $scope.points = {
-      coords: [],
-      properties:[],
-      options: function(coords, properties, i, map) {
-        return {
-          draggable: false,
-          crimePoint: properties[i],
-          icon: 'images/metropolitan_police_service.png'
+        coords: [],
+        properties:[],
+        options: function(coords, properties, i, map) {
+            return {
+                draggable: false,
+                crimePoint: properties[i],
+                icon: 'images/metropolitan_police_service.png'
+            }
+        },
+        events: {
+            click: function(e, point, map, points) {
+                $scope.crimeType = point.crimePoint.crimeType;
+                $scope.crimeLocation = point.crimePoint.crimeLocation;
+                $scope.crimeOutcome = switchOutcome(point.crimePoint.crimeOutcome);
+                $scope.$apply();
+            }
         }
-      },
-      events: {
-        click: function(e, point, map, points) {
-          $scope.crimeType = point.crimePoint.crimeType;
-          $scope.crimeLocation = point.crimePoint.crimeLocation;
-          $scope.crimeOutcome = switchOutcome(point.crimePoint.crimeOutcome);
-          $scope.$apply();
-        }
-      }
     };
-
-    $scope.mapLoadBorough = function(p,map){
+    // Load borough after selecting it on the map
+    function mapLoadBorough(p,map){
         $scope.selectedBorough.name = p.properties.NAME;
-        $rootScope.selectedBorough.name = $scope.selectedBorough.name;
         $scope.$apply();
 
         p.setOptions({
@@ -199,12 +161,6 @@ angular.module('londoncrimeApp')
                 });
             }
         };
-    }
-    function sumGroupDimensionValue(driverDimension){
-        return driverDimension.groupAll().reduceSum(function(d) {return d;}).value();
-    }
-    function getThreshold(driverDimension,driver,threshold){
-        return threshold === 'top' ? driverDimension.top(1)[0][driver] : driverDimension.bottom(1)[0][driver];
     }
     function sortGroup(groupDimension) {
         var domain = [];
@@ -375,6 +331,6 @@ angular.module('londoncrimeApp')
     }
     //<< Chart reStyling
 
+    // Go to child state
     $state.go('summary');
-
 });
