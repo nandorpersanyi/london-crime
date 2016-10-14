@@ -41,7 +41,7 @@ ul{
     padding: 0px;
   }
 }
-.active{
+.bold{
   font-weight: bold;
 }
 
@@ -58,15 +58,21 @@ ul{
       margin: 50px;
       padding: 50px;
       text-align: center;
+      #github-logo{
+        display: block;
+        width:50px;
+        margin: 0px auto;
+      }
     }
   }
   #footer{
     width: 100%;
     float: left;
     span{
-      text-align: center;
       width: 100%;
       float: left;
+      text-align: center;
+      padding: 20px 0px;
     }
   }
 }
@@ -195,6 +201,20 @@ ul{
 #chart-wrap{
   float: left;
   width: 100%;
+  #crime-point{
+    position: absolute;
+    width: 250px;
+    min-height: 100px;
+    top: 490px;
+    margin: 20px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(204, 204, 204);
+    span{
+      line-height: 25px;
+      display: block;
+      margin-left: 10px;
+    }
+  }
   #crime-location{
     text-align: center;
     font-weight: bold;
@@ -203,12 +223,17 @@ ul{
       font-weight: bold;
     }
   }
+  #chart-explanation{
+    p{
+      text-align:center;
+    }
+  }
   .charts{
     float: left;
     width: 50%;
     svg{
       display: block;
-      height: 400px;
+      height: 450px;
       margin: 0px auto;
     }
     span{
@@ -223,6 +248,9 @@ ul{
     .y-axis-label{
       font-size: 0.6em;
     }
+  }
+  .full-width-chart{
+    width: 100%;
   }
 }
 

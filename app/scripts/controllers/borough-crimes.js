@@ -14,9 +14,9 @@ angular.module('londoncrimeApp')
     var chartsHeight = 250;
     
     function initiateCharts(){
-        $scope.boroughOffenceChart = new $scope.createChart('bar','#borough-offence-chart','CrimeType',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,null,true);
-        $scope.boroughOutcomeChart = new $scope.createChart('bar','#borough-outcome-chart','LastOutcomeCategory',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,'switchOutcome',true);
-        $scope.boroughIdentifiedChart = new $scope.createChart('pie','#borough-identified-chart','Context',chartsWidth,chartsHeight,null,null,null,null,"postRedraw",null,null,'switchIdentified',null);
+        $scope.boroughOffenceChart = new $scope.createChart('bar','#borough-offence-chart','CrimeType',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,null,true,false);
+        $scope.boroughOutcomeChart = new $scope.createChart('bar','#borough-outcome-chart','LastOutcomeCategory',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,'switchOutcome',true,'switchIdentified');
+        $scope.boroughIdentifiedChart = new $scope.createChart('pie','#borough-identified-chart','Context',chartsWidth,chartsHeight,null,null,null,null,"postRedraw",null,null,'switchIdentified',null,'switchOutcome');
     }
 
     function drawBoroughCharts(){
@@ -55,11 +55,16 @@ angular.module('londoncrimeApp')
             var crimePoints = $scope.boroughCrimeData.map(function(crime){
                 return [crime.Latitude,crime.Longitude]
             });
+
             var crimePointProperties = $scope.boroughCrimeData.map(function(crime){
-                var crimeTypeObj = {"crimeType" : crime.CrimeType};
+                var crimeTypeObj = {
+                    "crimeType" : crime.CrimeType,
+                    "crimeLocation" : crime.Location,
+                    "crimeOutcome" : crime.LastOutcomeCategory
+                };
                 return crimeTypeObj
             });
-            
+
             $scope.points.properties = crimePointProperties;
             $scope.points.coords = crimePoints;
         }

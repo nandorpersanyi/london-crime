@@ -13,10 +13,10 @@ angular.module('londoncrimeApp')
     var chartsWidth = 525;
     var chartsHeight = 250;
     //Params:  chartType,chartId,chartKey,width,height,xScale,xScaleSort,xScaleDomain,centerBar,event,eventFunc,tickNum,tickSwitchFunc,positionLabel
-    var offenceChart = new $scope.createChart('bar','#offence-chart','CrimeType',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,null,true);
-    var boroughChart = new $scope.createChart('bar','#borough-chart','LSOA_name',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,null,true);
-    var outcomeChart = new $scope.createChart('bar','#outcome-chart','LastOutcomeCategory',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,'switchOutcome',true);
-    var identifiedChart = new $scope.createChart('pie','#identified-chart','Context',chartsWidth,chartsHeight,null,null,null,null,"postRedraw",null,null,'switchIdentified',null);
+    var offenceChart = new $scope.createChart('bar','#offence-chart','CrimeType',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,null,true,false);
+    var boroughChart = new $scope.createChart('bar','#borough-chart','LSOA_name',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,null,true,false);
+    var outcomeChart = new $scope.createChart('bar','#outcome-chart','LastOutcomeCategory',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,'switchOutcome',true,'switchOutcome');
+    var identifiedChart = new $scope.createChart('pie','#identified-chart','Context',chartsWidth,chartsHeight,null,null,null,null,"postRedraw",null,null,'switchIdentified',null,'switchIdentified');
     
     dc.renderAll();
 

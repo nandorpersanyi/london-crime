@@ -130,13 +130,16 @@ angular.module('londoncrimeApp')
       options: function(coords, properties, i, map) {
         return {
           draggable: false,
-          crimeType: properties[i],
+          crimePoint: properties[i],
           icon: '../images/metropolitan_police_service.png'
         }
       },
       events: {
         click: function(e, point, map, points) {
-          $scope.crimePoint = point.crimeType.crimeType;
+          $scope.crimeType = point.crimePoint.crimeType;
+          $scope.crimeLocation = point.crimePoint.crimeLocation;
+          $scope.crimeOutcome = switchOutcome(point.crimePoint.crimeOutcome);
+          $scope.$apply();
         }
       }
     };
@@ -271,7 +274,7 @@ angular.module('londoncrimeApp')
     //<< Crossfilter Logic
 
     //Chart constructor
-    $scope.createChart = function(chartType,chartId,chartKey,width,height,xScale,xScaleSort,xScaleDomain,centerBar,event,eventFunc,tickNum,tickSwitchFunc,renderletFunc){
+    $scope.createChart = function(chartType,chartId,chartKey,width,height,xScale,xScaleSort,xScaleDomain,centerBar,event,eventFunc,tickNum,tickSwitchFunc,renderletFunc,switchTitle){
         if(chartType === 'bar'){
             var chart  = dc.barChart(chartId);
         } else if(chartType === 'pie'){
@@ -300,19 +303,17 @@ angular.module('londoncrimeApp')
                 .renderHorizontalGridLines(true)
                 .mouseZoomable(false);
         }
-        /*chartVar
-            .title(function (d){
-                return ((d.value/crimeNdx.groupAll().reduceSum(function(d) {return d;}).value().toFixed(4))*100).toFixed(1) + '%';
-                //return ((d.value / sumGroupDimensionValue(chartDimension)) * 100).toFixed(1) + '%';
-            });*/
+        if(switchTitle === 'switchOutcome')
+            chartVar.title(function (d){ return switchOutcome(d.key) + ': ' + d.value; });
+        if(switchTitle === 'switchIdentified')
+            chartVar.label(function (d){ return switchIdentified(d.key) + ': ' + d.value; });
         chartType === 'pie' ? chartVar.innerRadius(30) : chartVar.yAxisLabel(yAxisLabel).elasticY(true);
-        if(centerBar)
+        if(centerBar) 
             chartVar.centerBar(true);
-        if(event)
+        if(event) 
             chartVar.on(event, eventFunc);
-        if(tickSwitchFunc === 'switchOutcome'){
+        if(tickSwitchFunc === 'switchOutcome') 
             chartVar.xAxis().ticks(tickNum).tickFormat(switchOutcome);
-        }
         if(renderletFunc)
             chartVar.renderlet(positionLabels);
 
