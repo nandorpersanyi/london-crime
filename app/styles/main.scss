@@ -218,7 +218,7 @@ ul{
   #crime-point-filter{
     position: absolute;
     width: 180px;
-    top: 200px;
+    top: 170px;
     margin: 20px;
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(204, 204, 204);
@@ -226,9 +226,16 @@ ul{
       float: left;
       display: block;
       width: 100%;
+      padding: 2px;
       span{
         font-size: 10px;
         font-weight:bold;
+      }
+      input{
+        vertical-align: middle;
+      }
+      #filter-all{
+        cursor:pointer;
       }
     }
   }

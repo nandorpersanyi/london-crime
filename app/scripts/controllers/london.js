@@ -13,7 +13,9 @@ angular.module('londoncrimeApp')
     $scope.crimeData = crimeData;
     $scope.selectedBorough = {};
     $scope.selectedBoroughTitle = 'London';
+    $scope.selectedBorough.name = 'London';
     var boroughSelected = false;
+    var firstBoroughSelected = false;
 
     // Map Logic >>>
     // Set map directive config object
@@ -67,12 +69,12 @@ angular.module('londoncrimeApp')
                 }
             },
             click: function(e, p, map, polygons) {
-                if($scope.selectedBorough.name === undefined){
+                if($scope.selectedBorough.name === 'London'){
                     boroughSelected = true;
                     mapLoadBorough(p,map);
                 } else {
                     polygons.forEach(function(arrayElement,index) {
-                        if(arrayElement.properties.NAME == $scope.selectedBorough.name){
+                        if(arrayElement.properties.NAME === $scope.selectedBorough.name){
                             arrayElement.polygons.forEach(function(subArrayElement,subIndex) {
                                 subArrayElement.setOptions({
                                     fillColor: '#002699'
@@ -100,9 +102,9 @@ angular.module('londoncrimeApp')
         },
         events: {
             click: function(e, point, map, points) {
-                $scope.crimeType = point.crimePoint.crimeType;
-                $scope.crimeLocation = point.crimePoint.crimeLocation;
-                $scope.crimeOutcome = switchOutcome(point.crimePoint.crimeOutcome);
+                $scope.crimeType = point.crimePoint.CrimeType;
+                $scope.crimeLocation = point.crimePoint.CrimeLocation;
+                $scope.crimeOutcome = switchOutcome(point.crimePoint.CrimeOutcome);
                 $scope.$apply();
             }
         }
@@ -116,12 +118,15 @@ angular.module('londoncrimeApp')
             fillColor: 'transparent'
         });
         map.setOptions({
-            center: p.properties.CENTER,
-            zoom: 12
+            center: p.properties.CENTER
         });
-        if($state.current.name === 'summary'){
+        if(!firstBoroughSelected)
+            map.setOptions({
+                zoom: 12
+            });
+        firstBoroughSelected = true;
+        if($state.current.name === 'summary')
             $state.go("borough-crimes");
-        }
     };
     // <<< Map Logic
 

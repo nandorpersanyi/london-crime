@@ -18,20 +18,6 @@ angular.module('londoncrimeApp')
     var boroughIdentifiedChart = null;
     // Initiate boroughCrimeData object
     var boroughCrimeData = {};
-    // crimePointFilter object model, connected to filter checkboxes in view
-    $scope.crimePointFilter = {
-        'Bicycle theft' : true,
-        'Burglary' : true,
-        'Criminal damage and arson' : true,
-        'Drugs' : true,
-        'Other crime' : true,
-        'Posession of weapons' : true,
-        'Public order' : true,
-        'Robbery' : true,
-        'Shop lifting' : true,
-        'Vehicle crime' : true,
-        'Violence and sexual offences' : true
-    };
 
     // Create chart object instances
     function initiateCharts(){
@@ -76,9 +62,9 @@ angular.module('londoncrimeApp')
     // Creates crimePoint properties to add to markers on map
     function createCrimePointProps(crime){
         return {
-            "crimeType" : crime.CrimeType,
-            "crimeLocation" : crime.Location,
-            "crimeOutcome" : crime.LastOutcomeCategory
+            "CrimeType" : crime.CrimeType,
+            "CrimeLocation" : crime.Location,
+            "CrimeOutcome" : crime.LastOutcomeCategory
         };
     }
 
@@ -91,6 +77,23 @@ angular.module('londoncrimeApp')
             $scope.points.properties = boroughCrimeData.map(function(crime){ return createCrimePointProps(crime) });
             // Set crime point coordinates array and pass it to points directive config object
             $scope.points.coords = boroughCrimeData.map(function(crime){ return createCrimePointCoords(crime) });
+
+            // crimePointFilter object model, connected to filter checkboxes in view
+            $scope.crimePointFilter = {
+                'Bicycle theft' : true,
+                'Burglary' : true,
+                'Criminal damage and arson' : true,
+                'Drugs' : true,
+                'Other crime' : true,
+                'Posession of weapons' : true,
+                'Public order' : true,
+                'Robbery' : true,
+                'Shop lifting' : true,
+                'Vehicle crime' : true,
+                'Violence and sexual offences' : true
+            };
+            $scope.filterAll = false;
+            $scope.filterAllText = 'Deselect all';
         }
     });
 
@@ -102,9 +105,30 @@ angular.module('londoncrimeApp')
     // Bootstrap crimePoint filter event, triggered in view. Resets crimePoint properties object and crimePoint
     // coordinates array and passes it to points directive config object 
     $scope.filterCrimePoints = function(){
-        $scope.points.properties = boroughCrimeData.map(function(crime){return createCrimePointProps(crime)});
+        console.log($scope.points.properties);
+        $scope.points.properties = boroughCrimeData
+            .filter(function(crime){return filterCrime(crime)})
+            .map(function(crime){return createCrimePointProps(crime)});
         $scope.points.coords = boroughCrimeData
             .filter(function(crime){return filterCrime(crime)})
             .map(function(crime){return createCrimePointCoords(crime)});
     }
+    
+    $scope.allFilters = function(){
+        console.log($scope.filterAll)
+        if($scope.filterAll){
+            Object.keys($scope.crimePointFilter).forEach(function (key) {$scope.crimePointFilter[key.toString()] = true;});
+            $scope.filterAll = false;
+            $scope.points.properties = boroughCrimeData.map(function(crime){return createCrimePointProps(crime)});
+            $scope.points.coords = boroughCrimeData.map(function(crime){ return createCrimePointCoords(crime) });
+            $scope.filterAllText = 'Deselect all';
+        } else{
+            Object.keys($scope.crimePointFilter).forEach(function (key) {$scope.crimePointFilter[key.toString()] = false;});
+            $scope.filterAll = true;
+            $scope.points.properties = [];
+            $scope.points.coords = [];
+            $scope.filterAllText = 'Select all';
+        }
+    }
+
 });

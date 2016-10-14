@@ -1,19 +1,18 @@
 <div id="crime-location"><h2>{{selectedBoroughTitle}}</h2></div>
 <div id="chart-explanation">
-    <p>The charts below are being built from a multi-dimensional dataset, which means it is possible to filter on the values of the charts and make them interact with each other.</p>
-    <p>You can filter on certain values by clicking them in the chart!</p>
+    <small>The charts below are being built from a multi-dimensional dataset, which means it is possible to filter on the values of the charts and make them interact with each other. You can filter on certain values by clicking them in the chart!</small>
 </div>
 <div id="london-summary">
     <div id="offence-chart" class="charts">
-        <h3>Crime Type</h3>
+        <h3>Crime Types in {{selectedBorough.name}}</h3>
     </div>
     <div id="borough-chart" class="charts">
-        <h3>Borough</h3>
+        <h3>Crimes by Boroughs</h3>
     </div>
     <div id="outcome-chart" class="charts">
-        <h3>Outcome</h3>
+        <h3>Outcomes in {{selectedBorough.name}}</h3>
     </div>
     <div id="identified-chart" class="charts">
-        <h3>Identified Suspect</h3>
+        <h3>Identified Suspects Ratio in {{selectedBorough.name}}</h3>
     </div>
 </div>
