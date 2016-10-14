@@ -1,8 +1,10 @@
 <div id="crime-point">
 	<span ng-show="!crimeType" class="bold">Zoom in on the map and select a crime scene!</span>
-	<span class="bold">{{crimeType}}</span>
-	<span>{{crimeLocation}}</span>
-	<span>{{crimeOutcome}}</span>
+	<div ng-show="crimeType">
+		<span class="bold">{{crimeType}}</span>
+		<span>{{crimeLocation}}</span>
+		<span>{{crimeOutcome}}</span>
+	</div>
 </div>
 <div id="crime-location"><h2>{{selectedBoroughTitle}}</h2></div>
 <div id="chart-explanation">

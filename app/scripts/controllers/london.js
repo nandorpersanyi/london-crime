@@ -118,6 +118,7 @@ angular.module('londoncrimeApp')
                         }
                     });
                     $scope.boroughSelected = true;
+                    $scope.crimeType = null;
                     $scope.mapLoadBorough(p,map);
                 }
             }
@@ -305,8 +306,10 @@ angular.module('londoncrimeApp')
         }
         if(switchTitle === 'switchOutcome')
             chartVar.title(function (d){ return switchOutcome(d.key) + ': ' + d.value; });
-        if(switchTitle === 'switchIdentified')
-            chartVar.label(function (d){ return switchIdentified(d.key) + ': ' + d.value; });
+        if(switchTitle === 'switchIdentified'){
+            chartVar.label(function (d){ return switchIdentified(d.key); });
+            chartVar.title(function (d){ return switchIdentified(d.key) + ': ' + d.value; });
+        }
         chartType === 'pie' ? chartVar.innerRadius(30) : chartVar.yAxisLabel(yAxisLabel).elasticY(true);
         if(centerBar) 
             chartVar.centerBar(true);
