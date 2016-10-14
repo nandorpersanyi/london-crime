@@ -1,5 +1,9 @@
 # London Crime Dashboard
 
+[http://web.nandorpersanyi.com/london-crime-dashboard/](http://web.nandorpersanyi.com/london-crime-dashboard/ "London Crime Dashboard")
+
+- username: london
+- password: crime
 
 ## Build & development
 
@@ -12,3 +16,5 @@
 ## Deploy
 
 `grunt builddeploy`
+
+Will deploy the application in the www/ folder
