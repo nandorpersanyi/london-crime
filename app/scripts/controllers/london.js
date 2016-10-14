@@ -132,7 +132,7 @@ angular.module('londoncrimeApp')
         return {
           draggable: false,
           crimePoint: properties[i],
-          icon: '../images/metropolitan_police_service.png'
+          icon: 'images/metropolitan_police_service.png'
         }
       },
       events: {
