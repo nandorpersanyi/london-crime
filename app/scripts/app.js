@@ -14,9 +14,7 @@ angular
     'ngCookies',
     'ngResource',
     'ngTouch',
-    'ngMaps',
-    'duScroll',
-    'angularDc'
+    'ngMaps'
 ])
 .constant("CRIMEDATA_ENDPOINT", "data/2015-10-metropolitan-street-trimmed4.json")
 .constant("MAPDATA_ENDPOINT", "data/london-boroughs.geojson")

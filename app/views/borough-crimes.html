@@ -20,13 +20,13 @@
     <small>The charts below are being built from a multi-dimensional dataset, which means it is possible to filter on the values of the charts and make them interact with each other. You can filter on certain values by clicking them in the chart!</small>
 </div>
 <div id="borough-crimes">
-    <div id="borough-offence-chart" class="charts">
+    <londoncrimecharts class="charts" id="offence-chart" charttype="offenceChart.charttype" chartid="offenceChart.chartid" chartkey="offenceChart.chartkey" width=525 height=250 xscale="offenceChart.xscale" xscalesort="offenceChart.xscalesort" xscaledomain="offenceChart.xscaledomain" centerbar="offenceChart.centerbar" event="offenceChart.event" eventfunc="offenceChart.eventfunc" ticknum="offenceChart.ticknum" tickswitchfunc="offenceChart.tickswitchfunc" positionlabel="offenceChart.positionlabel" switchtitle="offenceChart.switchtitle">
         <h3>Crime Types in {{selectedBorough.name}}</h3>
-    </div>
-    <div id="borough-outcome-chart" class="charts">
+    </londoncrimecharts>
+    <londoncrimecharts class="charts" id="outcome-chart" charttype="outcomeChart.charttype" chartid="outcomeChart.chartid" chartkey="outcomeChart.chartkey" width=525 height=250 xscale="outcomeChart.xscale" xscalesort="outcomeChart.xscalesort" xscaledomain="outcomeChart.xscaledomain" centerbar="outcomeChart.centerbar" event="outcomeChart.event" eventfunc="outcomeChart.eventfunc" ticknum="outcomeChart.ticknum" tickswitchfunc="outcomeChart.tickswitchfunc" positionlabel="outcomeChart.positionlabel" switchtitle="outcomeChart.switchtitle">
         <h3>Outcomes in {{selectedBorough.name}}</h3>
-    </div>
-    <div id="borough-identified-chart" class="charts full-width-chart">
+    </londoncrimecharts>
+    <londoncrimecharts class="charts full-width-chart" id="identified-chart" charttype="identifiedChart.charttype" chartid="identifiedChart.chartid" chartkey="identifiedChart.chartkey" width=525 height=250 xscale="identifiedChart.xscale" xscalesort="identifiedChart.xscalesort" xscaledomain="identifiedChart.xscaledomain" centerbar="identifiedChart.centerbar" event="identifiedChart.event" eventfunc="identifiedChart.eventfunc" ticknum="identifiedChart.ticknum" tickswitchfunc="identifiedChart.tickswitchfunc" positionlabel="identifiedChart.positionlabel" switchtitle="identifiedChart.switchtitle">
         <h3>Identified Suspects Ratio in {{selectedBorough.name}}</h3>
-    </div>
+    </londoncrimecharts>
 </div>

@@ -10,48 +10,56 @@
 angular.module('londoncrimeApp')
 .controller('boroughCrimesController', function ($scope,$rootScope,$timeout,$document,$window,$state) {
 
-    var chartsWidth = 525;
-    var chartsHeight = 250;
-    // Initiate chart object instances
-    var boroughOffenceChart = null;
-    var boroughOutcomeChart = null;
-    var boroughIdentifiedChart = null;
-    // Initiate boroughCrimeData object
     var boroughCrimeData = {};
+    var firstBorough = true;
 
-    // Create chart object instances
-    function initiateCharts(){
-        boroughOffenceChart = new $scope.createChart('bar','#borough-offence-chart','CrimeType',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,null,true,false);
-        boroughOutcomeChart = new $scope.createChart('bar','#borough-outcome-chart','LastOutcomeCategory',chartsWidth,chartsHeight,'ordinal',null,null,null,"postRedraw",null,null,'switchOutcome',true,'switchOutcome');
-        boroughIdentifiedChart = new $scope.createChart('pie','#borough-identified-chart','Context',chartsWidth,chartsHeight,null,null,null,null,"postRedraw",null,null,'switchIdentified',null,'switchIdentified');
-    }
+    filterCrimeData();
+    setCrimePoints();
 
-    function drawBoroughCharts(){
+    // Observe borough change event, also triggered on first borough load 
+    $scope.$watch('selectedBorough.name',function(){
+        if(!firstBorough){
+            filterCrimeData();
+            setCrimePoints();
+            $rootScope.$broadcast('borough-changed');
+        } else {
+            firstBorough = false;
+        }
+    });
+
+    // Create crimeData object filtered on selected borough
+    function filterCrimeData(){
         // Create filtered crimeData object using parent controller's crimeData object filtered by selected borough
         boroughCrimeData = $scope.crimeData.filter(function(crime){
             return crime.LSOA_name === $scope.selectedBorough.name;
         });
         // Set crimes filtered by selected borough in main crossfilter object 
         $rootScope.crimeNdx = crossfilter(boroughCrimeData);
-        // If charts were already set, dispose crossfilter's old chart dimension objects, and set the new ones
-        if(boroughOffenceChart){
-            boroughOffenceChart.disposeChartDimension();
-            boroughOutcomeChart.disposeChartDimension();
-            boroughIdentifiedChart.disposeChartDimension();
+    }
 
-            initiateCharts();
-            
-            boroughOffenceChart.getChartObj().render();
-            boroughOutcomeChart.getChartObj().render();
-            boroughIdentifiedChart.getChartObj().render();
-            dc.redrawAll();
-        } else{
-            initiateCharts();
-            dc.renderAll();
-        }
-        // Realign y axis label
-        $scope.alignChart('#borough-offence-chart',20,null,null);
-        $scope.alignChart('#borough-outcome-chart',20,null,null);
+    // Plot crimes on map >>
+    function setCrimePoints(){
+        // Set crime point properties object and pass it to points directive config object
+        $scope.points.properties = boroughCrimeData.map(function(crime){ return createCrimePointProps(crime) });
+        // Set crime point coordinates array and pass it to points directive config object
+        $scope.points.coords = boroughCrimeData.map(function(crime){ return createCrimePointCoords(crime) });
+
+        // crimePointFilter object model, connected to filter checkboxes in view
+        $scope.crimePointFilter = {
+            'Bicycle theft' : true,
+            'Burglary' : true,
+            'Criminal damage and arson' : true,
+            'Drugs' : true,
+            'Other crime' : true,
+            'Posession of weapons' : true,
+            'Public order' : true,
+            'Robbery' : true,
+            'Shop lifting' : true,
+            'Vehicle crime' : true,
+            'Violence and sexual offences' : true
+        };
+        $scope.filterAll = false;
+        $scope.filterAllText = 'Deselect all';
     }
 
     // Returns array containing coordinates of crimePoints
@@ -68,35 +76,6 @@ angular.module('londoncrimeApp')
         };
     }
 
-    // Draw borough charts >>
-    // Watch borough change event, also triggered on first borough load 
-    $scope.$watch('selectedBorough.name',function(){
-        if($state.current.name === 'borough-crimes'){
-            drawBoroughCharts();
-            // Set crime point properties object and pass it to points directive config object
-            $scope.points.properties = boroughCrimeData.map(function(crime){ return createCrimePointProps(crime) });
-            // Set crime point coordinates array and pass it to points directive config object
-            $scope.points.coords = boroughCrimeData.map(function(crime){ return createCrimePointCoords(crime) });
-
-            // crimePointFilter object model, connected to filter checkboxes in view
-            $scope.crimePointFilter = {
-                'Bicycle theft' : true,
-                'Burglary' : true,
-                'Criminal damage and arson' : true,
-                'Drugs' : true,
-                'Other crime' : true,
-                'Posession of weapons' : true,
-                'Public order' : true,
-                'Robbery' : true,
-                'Shop lifting' : true,
-                'Vehicle crime' : true,
-                'Violence and sexual offences' : true
-            };
-            $scope.filterAll = false;
-            $scope.filterAllText = 'Deselect all';
-        }
-    });
-
     // Filter crimePoints >>
     // Filter crimes against crimePointFilter object
     function filterCrime(crime){
@@ -105,7 +84,6 @@ angular.module('londoncrimeApp')
     // Bootstrap crimePoint filter event, triggered in view. Resets crimePoint properties object and crimePoint
     // coordinates array and passes it to points directive config object 
     $scope.filterCrimePoints = function(){
-        console.log($scope.points.properties);
         $scope.points.properties = boroughCrimeData
             .filter(function(crime){return filterCrime(crime)})
             .map(function(crime){return createCrimePointProps(crime)});
@@ -115,7 +93,6 @@ angular.module('londoncrimeApp')
     }
     
     $scope.allFilters = function(){
-        console.log($scope.filterAll)
         if($scope.filterAll){
             Object.keys($scope.crimePointFilter).forEach(function (key) {$scope.crimePointFilter[key.toString()] = true;});
             $scope.filterAll = false;
