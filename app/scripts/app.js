@@ -18,7 +18,7 @@ angular
 ])
 .constant("CRIMEDATA_ENDPOINT", "data/2015-10-metropolitan-street-trimmed4.json")
 .constant("MAPDATA_ENDPOINT", "data/london-boroughs.geojson")
-.run(['$rootScope','$state', '$cookieStore','authService',function($rootScope,$state, $cookieStore,authService){
+/*.run(['$rootScope','$state', '$cookieStore','authService',function($rootScope,$state, $cookieStore,authService){
     $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
         if(error.unAuthorized) {
             $state.go("login");
@@ -27,13 +27,13 @@ angular
         }
     });
     authService.user=$cookieStore.get('londoncrime-dashboard-user');
-}])
+}])*/
 .run(function($rootScope, $state) {
     $rootScope.$state = $state;
 })
 .config(function ($stateProvider,$urlRouterProvider) {
     $stateProvider
-    .state('login', {
+/*    .state('login', {
         url: '/',
         controller: 'LoginController',
         resolve:{
@@ -44,15 +44,15 @@ angular
             }]
         },
         templateUrl: 'views/login.html'
-    })
+    })*/
     .state('dashboard', {
-        url: '/dashboard',
+        url: '/',
         controller: 'DashboardController',
-        resolve:{
+        /*resolve:{
             user:['authService','$q',function(authService,$q){
                 return authService.user || $q.reject({ unAuthorized:true });
             }]
-        },
+        },*/
         templateUrl: 'views/dashboard.html'
     })
         .state('london', {

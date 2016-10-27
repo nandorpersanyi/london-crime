@@ -3,7 +3,7 @@
 [http://web.nandorpersanyi.com/london-crime-dashboard/](http://web.nandorpersanyi.com/london-crime-dashboard/ "London Crime Dashboard")
 
 - username: london
-- password: crime
+- password: crime1234
 
 ## Build & development
 
@@ -17,4 +17,4 @@
 
 `grunt builddeploy`
 
-Will deploy the application in the www/ folder
+Will deploy the application in the `www/` folder
