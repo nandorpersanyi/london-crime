@@ -35,4 +35,4 @@ index.html, line 28
 
 `grunt builddeploy`
 
-Will deploy the application in the dist folder
+Will deploy the application in the www folder
