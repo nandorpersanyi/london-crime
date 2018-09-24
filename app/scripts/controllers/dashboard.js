@@ -8,9 +8,9 @@
  * Controller of the londoncrimeApp
  */
 angular.module('londoncrimeApp')
-.controller('DashboardController', function ($scope,$state,authService) {
+.controller('DashboardController', function ($scope,$state/*,authService*/) {
 	
-	$scope.Logout = function(){
+	/*$scope.Logout = function(){
 		authService.logout();
-	};
+	};*/
 });

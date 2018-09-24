@@ -8,15 +8,15 @@
 * Directive of the londoncrimeApp
 */
 angular.module('londoncrimeApp')
-.factory('dataService', ['$http','$state','authService','$cookieStore', function($http,$state,authService,$cookieStore){
+.factory('dataService', ['$http','$state',/*'authService','$cookieStore',*/ function($http,$state/*,authService,$cookieStore*/){
     var dataService={};
     dataService.getData = function(filename){
         return $http.get(filename)
         .then(function(response){
             return response.data;
         },function error(msg) {
-            authService.user=undefined;
-            $cookieStore.remove('londoncrime-dashboard-user');
+            //authService.user=undefined;
+            //$cookieStore.remove('londoncrime-dashboard-user');
             sessionStorage.clear();
             $state.go("login");
         });
