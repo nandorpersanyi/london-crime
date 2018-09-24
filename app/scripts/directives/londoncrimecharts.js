@@ -91,7 +91,7 @@ angular.module('londoncrimeApp')
                     chartVar.label(function (d){ return switchIdentified(d.key); });
                     chartVar.title(function (d){ return switchIdentified(d.key) + ': ' + d.value; });
                 }
-                chartType === 'pie' ? chartVar.innerRadius(30) : chartVar.yAxisLabel(yAxisLabel).elasticY(true);
+                chartType === 'pie' ? chartVar.innerRadius(30) : chartVar/*.yAxisLabel(yAxisLabel)*/.elasticY(true);
                 if(centerBar) 
                     chartVar.centerBar(true);
                 if(event) 
