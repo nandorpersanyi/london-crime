@@ -4,5 +4,6 @@
 /bower_components
 /dist
 /data
-/app/data
+/app/data/*
+!/app/data/readme.txt
 /www
